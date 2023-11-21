@@ -1,31 +1,42 @@
-import React from "react";
-import Image from "next/image";
+"use client"
 
-const popularRestaurants = [
-  {
-    id: 1,
-    name: "Restaurant 1",
-    image: "https://b.zmtcdn.com/data/pictures/chains/2/53922/2cc325e095dfa78bf99324794c0739fa_o2_featured_v2.jpg?output-format=webp",
-    rating: 4.5,
-    reviews: 100,
-  },
-  {
-    id: 2,
-    name: "Restaurant 2",
-    image: "https://b.zmtcdn.com/data/pictures/chains/3/18893733/feaaf0df9b3cc8aa92571f60999f56ea_o2_featured_v2.png",
-    rating: 4.2,
-    reviews: 80,
-  },
-  {
-    id: 3,
-    name: "Restaurant 3",
-    image: "https://b.zmtcdn.com/data/pictures/chains/5/61555/8c49ba335683507ba6ddee2dc84966e8_o2_featured_v2.jpg",
-    rating: 4.8,
-    reviews: 120,
-  },
-];
+import React, {useEffect, useState} from "react";
+import Image from "next/image";
+import axios from "axios";
+import { Link } from 'react-router-dom';
+
+// const popularRestaurants = [
+//   {
+//     id: 1,
+//     name: "Restaurant 1",
+//     image: "https://b.zmtcdn.com/data/pictures/chains/2/53922/2cc325e095dfa78bf99324794c0739fa_o2_featured_v2.jpg?output-format=webp",
+//     rating: 4.5,
+//     reviews: 100,
+//   },
+// ];
+interface Restaurant {
+  id: number;
+  name: string;
+  image: string;
+  rating: number;
+  reviews: number;
+}
 
 const IndexPage = () => {
+  const [popularRestaurants, setPopularRestaurants] = useState<Restaurant[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/api/restaurants');
+        setPopularRestaurants(response.data);
+      } catch (error) {
+        console.error('Error fetching data from server:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div>
       <div className="flex flex-col items-center justify-center mt-10">

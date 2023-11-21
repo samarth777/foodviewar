@@ -1,0 +1,6 @@
+things left to do:
+    -use <Link /> to link to the individual pages together
+    -populate database with more data
+    -implement feature to display the AR model of the food item
+    -cart(optional it there is time)
+    -improve UI/make frontend look better(optional it there is time)

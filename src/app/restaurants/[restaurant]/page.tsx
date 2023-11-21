@@ -1,51 +1,88 @@
-import React from 'react';
+"use client"
+import React, { useEffect, useState } from "react";
+// import { useParams } from "react-router-dom";
+import { useRouter } from "next/router";
+import { useParams } from "next/navigation";
 
-const restaurantName = 'Restaurant Name';
-const menuFilters = ['Veg', 'All', 'Appetizers', 'Entrees', 'Desserts'];
+const restaurantName = "Restaurant Name";
+const menuFilters = ["Veg", "All", "Appetizers", "Entrees", "Desserts"];
 
-const foodItems = [
-  {
-    id: 1,
-    name: 'Food Item 1',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    price: 10.99,
-    image: 'https://b.zmtcdn.com/data/dish_photos/186/386ad114b217ec3b0f8d354dbab54186.jpg',
-  },
-  {
-    id: 2,
-    name: 'Food Item 2',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    price: 12.99,
-    image: 'https://b.zmtcdn.com/data/dish_photos/507/0697551ecac8dd1cefe656a0944c4507.jpg',
-  },
-  {
-    id: 3,
-    name: 'Food Item 3',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    price: 8.99,    
-    image: 'https://b.zmtcdn.com/data/dish_photos/368/071de0e665f93aa799411eef1a8e3368.jpg',
-  },
-  {
-    id: 4,
-    name: 'Food Item 4',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    price: 8.99,    
-    image: 'https://b.zmtcdn.com/data/dish_photos/239/15860324ebe40f8fa5b70e1b6ac41239.jpg',
-  },
-  {
-    id: 5,
-    name: 'Food Item 5',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    price: 8.99,    
-    image: 'https://b.zmtcdn.com/data/dish_photos/c3d/fceb85636f307c2cd5ba7f2f11504c3d.jpg',
-  },
-];
+// const foodItems = [
+//   {
+//     id: 1,
+//     name: "Food Item 1",
+//     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+//     price: 10.99,
+//     image:
+//       "https://b.zmtcdn.com/data/dish_photos/186/386ad114b217ec3b0f8d354dbab54186.jpg",
+//   },
+//   {
+//     id: 2,
+//     name: "Food Item 2",
+//     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+//     price: 12.99,
+//     image:
+//       "https://b.zmtcdn.com/data/dish_photos/507/0697551ecac8dd1cefe656a0944c4507.jpg",
+//   },
+//   {
+//     id: 3,
+//     name: "Food Item 3",
+//     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+//     price: 8.99,
+//     image:
+//       "https://b.zmtcdn.com/data/dish_photos/368/071de0e665f93aa799411eef1a8e3368.jpg",
+//   },
+//   {
+//     id: 4,
+//     name: "Food Item 4",
+//     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+//     price: 8.99,
+//     image:
+//       "https://b.zmtcdn.com/data/dish_photos/239/15860324ebe40f8fa5b70e1b6ac41239.jpg",
+//   },
+//   {
+//     id: 5,
+//     name: "Food Item 5",
+//     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+//     price: 8.99,
+//     image:
+//       "https://b.zmtcdn.com/data/dish_photos/c3d/fceb85636f307c2cd5ba7f2f11504c3d.jpg",
+//   },
+// ];
+
+interface Menu {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  image: string;
+}
 
 const IndexPage = () => {
 //   const handleViewInAR = (foodItem) => {
 //     // Handle view in AR functionality
 //     console.log(`Viewing ${foodItem.name} in AR...`);
 //   };
+  // const { _id } = useParams();
+  const params = useParams();
+  const _id = params.restaurant;
+
+  const [foodItems, setFoodItems] = useState<Menu[]>([]);
+
+  console.log(_id);
+  useEffect(() => {
+    fetch(`http://localhost:3001/api/restaurants/${_id}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => setFoodItems(data))
+      .catch((error) => console.log('Fetching food items failed: ', error));
+  }, [_id]);
+  console.log(foodItems);
+  
 
   return (
     <div>
