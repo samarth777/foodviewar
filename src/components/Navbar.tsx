@@ -15,21 +15,6 @@ function Navbar() {
     <nav className="bg-secondary text-black border-gray-200">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link href="/" className="flex items-center">
-          {/* <Image src="/Logo.png" height={40} width={40} className="mr-4"/> */}
-          {/* <svg
-            width="36"
-            height="40"
-            viewBox="-10.5 -9.45 21 18.9"
-            fill="#fff"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle cx="0" cy="0" r="2"></circle>
-            <g stroke="#fff" strokeWidth="1" fill="none">
-              <ellipse rx="10" ry="4.5"></ellipse>
-              <ellipse rx="10" ry="4.5" transform="rotate(60)"></ellipse>
-              <ellipse rx="10" ry="4.5" transform="rotate(120)"></ellipse>
-            </g>
-          </svg> */}
           <span className="text-2xl font-semibold whitespace-nowrap ml-2">
             FoodViewAR
           </span>
@@ -68,8 +53,8 @@ function Navbar() {
               </Link>
             </li>
             <li>
-              <Link href="/about" className="links">
-                About
+              <Link href="/restaurants" className="links">
+                Restaurants
               </Link>
             </li>
             </ul>

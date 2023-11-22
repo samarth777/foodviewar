@@ -60,18 +60,18 @@ const IndexPage = () => {
             <Image src="/qr.png" alt="qr" width="150" height="150" />
           </div> */}
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-10">
+        <div className="flex">
           {popularRestaurants.map((restaurant) => (
           <Link href={`/restaurants/${restaurant._id}`}>
             <div
               key={restaurant.id}
-              className="bg-white shadow-md rounded-md overflow-hidden"
+              className="bg-white shadow-md rounded-md p-5 m-5 overflow-hidden"
             >
               <Image
                 src={restaurant.image}
                 alt={restaurant.name}
-                width={500}
-                height={500}
+                width={400}
+                height={400}
               />
               <div className="p-4">
                 <h2 className="text-lg font-semibold">{restaurant.name}</h2>

@@ -26,7 +26,7 @@ export default function Home() {
           </p>
         </div>
       </div>
-      <Link href="/restaurants"><button className="bg-gray-800 text-white font-semibold rounded-lg p-5 m-12 py-2 mt-10" > Get Started</button></Link>
+      <Link className="flex justify-center" href="/restaurants"><button className="flex bg-gray-800 text-white font-semibold rounded-lg justify-center p-5 m-12 py-2 mt-10" > Get Started</button></Link>
       
     </main>
   );
