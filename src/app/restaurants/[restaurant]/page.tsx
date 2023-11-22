@@ -52,8 +52,10 @@ const IndexPage = () => {
     );
   };
 
+  const [searchTerm, setSearchTerm] = useState('');
+
   useEffect(() => {
-    fetch(`http://localhost:3001/api/restaurants/${_id}`)
+    fetch(`http://localhost:3001/api/restaurants/${_id}?search=${searchTerm}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -62,7 +64,11 @@ const IndexPage = () => {
       })
       .then((data) => setFoodItems(data))
       .catch((error) => console.log("Fetching food items failed: ", error));
-  }, [_id]);
+  }, [searchTerm]);
+
+  const handleSearch = () => {
+    setSearchTerm(searchTerm);
+  }
 
   const totalCartPrice = cart.reduce(
     (total, item) => total + item.price * item.quantity,
@@ -79,8 +85,10 @@ const IndexPage = () => {
               type="text"
               placeholder="Search menu items"
               className="w-full outline-none"
+              value={searchTerm}
+              onChange={e => setSearchTerm(e.target.value)}
             />
-            <button className="ml-2 bg-gray-800 text-white px-4 py-2 rounded-md">
+            <button className="ml-2 bg-gray-800 text-white px-4 py-2 rounded-md" onClick={handleSearch}>
               Search
             </button>
           </div>

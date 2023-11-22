@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import React, {useEffect, useState} from "react";
 import Image from "next/image";
@@ -16,10 +16,12 @@ interface Restaurant {
 
 const IndexPage = () => {
   const [popularRestaurants, setPopularRestaurants] = useState<Restaurant[]>([]);
+  const [searchTerm, setSearchTerm] = useState('');
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/api/restaurants');
+        const response = await axios.get(`http://localhost:3001/api/restaurants?search=${searchTerm}`);
         setPopularRestaurants(response.data);
       } catch (error) {
         console.error('Error fetching data from server:', error);
@@ -27,23 +29,29 @@ const IndexPage = () => {
     };
 
     fetchData();
-  }, []);
+  }, [searchTerm]);
+
+  const handleSearch = () => {
+    setSearchTerm(searchTerm);
+  }
 
   return (
     <div>
       <div className="flex flex-col items-center justify-center mt-10">
         <div className="flex flex-col items-center">
-          {/* <h1 className="text-3xl font-bold mb-4">Search Restaurants</h1> */}
-          {/* <div className="flex items-center border border-gray-300 rounded-md px-4 py-2 w-80">
-            {/* <input
+          <h1 className="text-3xl font-bold mb-4">Search Restaurants</h1>
+          <div className="flex items-center border border-gray-300 rounded-md px-4 py-2 w-80">
+            <input
               type="text"
               placeholder="Enter a location"
               className="w-full outline-none"
-            /> */}
-            {/* <button className="ml-2 bg-gray-800 text-white px-4 rounded-md">
+              value={searchTerm}
+              onChange={e => setSearchTerm(e.target.value)}
+            /> 
+            <button className="ml-2 bg-gray-800 text-white px-4 rounded-md" onClick={handleSearch}>
               Search
-            </button> */}
-          {/* </div> */}
+            </button>
+          </div>
         </div>
         <div className="flex">
           {popularRestaurants.map((restaurant) => (

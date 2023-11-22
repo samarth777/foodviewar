@@ -55,14 +55,30 @@ const Restaurant = mongoose.model('Restaurant', new mongoose.Schema({
 
 // fetches all restaraunnts
 app.get('/api/restaurants', async (req, res) => {
-  const restaurants = await Restaurant.find();
+  const { search } = req.query;
+  let restaurants;
+  
+  if (search) {
+    restaurants = await Restaurant.find({ name: new RegExp(search, 'i') });
+  } else {
+    restaurants = await Restaurant.find();
+  }
+
   res.send(restaurants);
 });
 
 // fetches entire restaraunt data
 app.get('/api/restaurants/:id', async (req, res) => {
+  const { search } = req.query;
   const restaurant = await Restaurant.findOne({ _id: req.params.id });
-  res.send(restaurant.menu);
+
+  let menu = restaurant.menu;
+
+  if (search) {
+    menu = menu.filter(item => item.name.toLowerCase().includes(search.toLowerCase()));
+  }
+
+  res.send(menu);
 });
 
 app.listen(3001, () => console.log('Server listening on port 3001'));
