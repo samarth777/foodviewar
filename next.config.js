@@ -1,7 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-      domains: ['b.zmtcdn.com'],
+      remotePatterns:[{
+        protocol:"https",
+        hostname:"**",
+      }]
+      // domains: ['upload.wikimedia.org'],
     },
   };
   

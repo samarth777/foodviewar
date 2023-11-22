@@ -20,28 +20,38 @@ const Restaurant = mongoose.model('Restaurant', new mongoose.Schema({
     description: String,
     price: Number,
     image: String,
+    url: String,
   }],
 }));
 
-// Sample data
-// const sampleRestaurant = new Restaurant({
-//   id: 1,
-//   name: "Sample Restaurant",
-//   image: "https://example.com/sample.jpg",
-//   rating: 4.5,
-//   reviews: 100,
-//   menu: [{
-//     id: 1,
-//     name: "Sample Dish",
-//     description: "This is a sample dish",
-//     price: 10.99,
-//     image: "https://example.com/sample-dish.jpg",
-//   }]
-// });
+const sampleRestaurant = new Restaurant({
+  id: 3,
+  name: "Baskin Robins",
+  image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Baskin-Robbins_logo.svg/1024px-Baskin-Robbins_logo.svg.png",
+  rating: 4.5,
+  reviews: 100,
+  menu: [{
+    id: 1,
+    name: "Ice Cream",
+    description: "Vanilla flavoured goodness!",
+    price: 10.99,
+    image: "https://i.pinimg.com/236x/cf/de/a1/cfdea1b08bbb19dd5e10c7677f97b704.jpg",
+    url: "https://go.echo3d.co/42iN"
+  },
+  {
+    id: 2,
+    name: "Sundae",
+    description: "A banana flavoured sundae!",
+    price: 10.99,
+    image: "https://i.pinimg.com/564x/a5/16/6b/a5166ba49c34b752144e7f092a823167.jpg",
+    url: "https://go.echo3d.co/F5rh"
+  }
+]
+});
 
-// sampleRestaurant.save()
-//   .then(() => console.log('Sample Restaurant saved to the database'))
-//   .catch(err => console.error('Failed to save Sample Restaurant: ', err));
+sampleRestaurant.save()
+  .then(() => console.log('Sample Restaurant saved to the database'))
+  .catch(err => console.error('Failed to save Sample Restaurant: ', err));
 
 // fetches all restaraunnts
 app.get('/api/restaurants', async (req, res) => {

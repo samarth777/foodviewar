@@ -3,7 +3,7 @@
 import React, {useEffect, useState} from "react";
 import Image from "next/image";
 import axios from "axios";
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 // const popularRestaurants = [
 //   {
@@ -20,6 +20,7 @@ interface Restaurant {
   image: string;
   rating: number;
   reviews: number;
+  _id: string
 }
 
 const IndexPage = () => {
@@ -61,6 +62,7 @@ const IndexPage = () => {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-10">
           {popularRestaurants.map((restaurant) => (
+          <Link href={`/restaurants/${restaurant._id}`}>
             <div
               key={restaurant.id}
               className="bg-white shadow-md rounded-md overflow-hidden"
@@ -83,6 +85,7 @@ const IndexPage = () => {
                 </div>
               </div>
             </div>
+          </Link>
           ))}
         </div>
       </div>

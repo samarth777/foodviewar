@@ -1,5 +1,5 @@
 import Image from "next/image";
-
+import Link from 'next/link';
 export default function Home() {
   return (
     <main className="flex flex-col">
@@ -26,7 +26,8 @@ export default function Home() {
           </p>
         </div>
       </div>
-      <button className="bg-gray-800 text-white font-semibold rounded-lg p-5 m-12 py-2 mt-10">Get Started</button>
+      <Link href="/restaurants"><button className="bg-gray-800 text-white font-semibold rounded-lg p-5 m-12 py-2 mt-10" > Get Started</button></Link>
+      
     </main>
   );
 }
