@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import { useParams } from "next/navigation";
 
 const restaurantName = "Restaurant Name";
@@ -95,7 +94,7 @@ const IndexPage = () => {
               </button>
             ))}
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4 mt-10">
             {foodItems.map((foodItem) => (
               <div
                 key={foodItem.id}
